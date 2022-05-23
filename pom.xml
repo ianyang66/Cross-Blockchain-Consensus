@@ -32,7 +32,29 @@
 	  <artifactId>quorum</artifactId>
 	  <version>4.8.4</version>
    </dependency>
-    
+    <dependency>
+	  <groupId>io.kauri.tutorials.java-ethereum</groupId>
+	  <artifactId>jpbc-api</artifactId>
+	  <version>1.0</version>
+	  <scope>system</scope>
+	  <systemPath>${pom.basedir}/JPBC/jars/jpbc-api-2.0.0.jar</systemPath>
+   </dependency>
+   
+   <dependency>
+	  <groupId>io.kauri.tutorials.java-ethereum</groupId>
+	  <artifactId>jpbc-plaf</artifactId>
+	  <version>1.0</version>
+	  <scope>system</scope>
+	  <systemPath>${pom.basedir}/JPBC/jars/jpbc-plaf-2.0.0.jar</systemPath>
+   </dependency>
+   
+   <dependency>
+	  <groupId>io.kauri.tutorials.java-ethereum</groupId>
+	  <artifactId>jpbc-pbc</artifactId>
+	  <version>1.0</version>
+	  <scope>system</scope>
+	  <systemPath>${pom.basedir}/JPBC/jars/jpbc-pbc-2.0.0.jar</systemPath>
+   </dependency>
   </dependencies>
   
   

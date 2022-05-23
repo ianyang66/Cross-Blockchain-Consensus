@@ -25,7 +25,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry excluding="main/java/|main/resources/|test/java/|test/resources/" kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-10">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
 			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
@@ -37,8 +37,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/wealt/eclipse/java-photon/JPBC/jars/jpbc-api-2.0.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/wealt/eclipse/java-photon/JPBC/jars/jpbc-pbc-2.0.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/wealt/eclipse/java-photon/JPBC/jars/jpbc-plaf-2.0.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

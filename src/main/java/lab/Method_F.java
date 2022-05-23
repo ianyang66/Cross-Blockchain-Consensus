@@ -729,71 +729,7 @@ public class Method_F {
 	    System.out.println("你的私鑰存放在：" + path + "\\privateKey.key");
 	    System.out.println("你的公鑰存放在：" + path + "\\publicKey.key");
 	}//加密算法
-     public static String encrypt(Element P_b, String data, BigInteger k, Element P_t, Element G){
-        try {
-              byte[] datasource=data.getBytes("utf8");
-              String CArray = "A";
-              //计算P_1
-              Element P_1 = G.duplicate().getImmutable().mul(k);
-              System.out.println("加密过程中计算出的P_1:"+ P_1);
-              //计算P_2
-              Element P_2 = P_b.duplicate().getImmutable().mul(k);
-              System.out.println("加密过程中计算出的P_2:"+ P_2);
-              //计算P_end
-              Element P_end = P_t.add(P_2);
-              System.out.println("加密过程中计算出的P_end:"+ P_end);
-              //计算密文C
-              String[] p_txy = P_t.toString().split(",");
-              BigInteger p_tx = new BigInteger(p_txy[0]);
-              BigInteger p_ty = new BigInteger(p_txy[1]);
-              for(int i=0;i<datasource.length;i++)
-              {
-                  BigInteger M = new BigInteger(datasource[i]+"");
-                  BigInteger C_mid = M.multiply(p_tx).add(p_ty);
-                  CArray = CArray +","+C_mid.toString();
-              }
-              CArray = CArray + ",,"+
-              Base64.getEncoder().encodeToString(P_1.toCanonicalRepresentation())+",,"+
-              Base64.getEncoder().encodeToString(P_end.toCanonicalRepresentation());
-              return Base64.getEncoder().encodeToString(CArray.getBytes());
-          }
-          catch(Exception ex) {
-              ex.printStackTrace();
-          }
-          return null;
-      }
-     public static String decrypt(BigInteger Privatekey, String data, Field G_1,Element G) {
-        try {
-              String ciphertext= new String(Base64.getDecoder().decode(data),"utf8");
-              //分解密文
-              String[] CS=ciphertext.split(",,");
-              String m = "";
-              //取出P_t+kP_b
-              Element P_end = G_1.newElementFromBytes(Base64.getDecoder().decode(CS[2]));
-              //取出P_1
-              Element P_1 = G_1.newElementFromBytes(Base64.getDecoder().decode(CS[1]));
-              //计算P_t
-              Element P_t = P_end.getImmutable().sub(P_1.getImmutable().mul(Privatekey));
-              System.out.println("解密过程中计算出的P_t:"+ P_t);
-              //计算明文M
-              String[] p_txy = P_t.toString().split(",");
-              BigInteger p_tx = new BigInteger(p_txy[0]);
-              BigInteger p_ty = new BigInteger(p_txy[1]);
-              //取出密文c
-              String[] Plaintext = CS[0].split(",");
-              for(int i=1;i<Plaintext.length;i++){
-                  BigInteger C = new BigInteger(Plaintext[i]);
-                  BigInteger M_mid = C.subtract(p_ty).divide(p_tx);
-                  m = m+new String(M_mid.toByteArray(),"GBK");;
-              }
-              return m;
-          }
-          catch(Exception ex) {
-              ex.printStackTrace();
-          }
-          return null;
-      }
-
+     
       //封装输出流
       public static void out(String path, String val) {
          try {
@@ -809,65 +745,7 @@ public class Method_F {
           }
       }
 
-      //从文件中读公钥
-      public static Element readPk(String path, Field G_1){
-          Element sk = null;
-          try {
-              File f=new File(path);
-              FileReader fr=new FileReader(f);
-              BufferedReader br=new BufferedReader(fr);
-              String line=null;
-              StringBuffer sb=new StringBuffer();
-              while((line=br.readLine())!=null) {
-                  byte[] b = Base64.getDecoder().decode(line);
-                  String[] key = new String(b).split(",,,,,,");
-                  byte [] a = Base64.getDecoder().decode(key[0]);
-                  System.out.println("\n");
-                  if(key.length == 2){
-                      sk = G_1.newElementFromBytes(a);
-                  } else{
-                      throw new Exception("文件错误");
-                  }
-              }
-
-              br.close();
-              return sk;
-          }
-          catch(Exception ex)
-          {
-              ex.printStackTrace();
-          }
-          return sk;
-      }
-
-  //从文件中读取私钥
-  public static BigInteger readSk(String path, Field G_1){
-          BigInteger sk = null;
-          try {
-              File f=new File(path);
-              FileReader fr=new FileReader(f);
-              BufferedReader br=new BufferedReader(fr);
-              String line=null;
-
-              StringBuffer sb=new StringBuffer();
-              while((line=br.readLine())!=null) {
-                  byte[] b = Base64.getDecoder().decode(line);
-                  String[] key = new String(b).split(",,,,,,");
-                  if (key.length == 1) {
-                      sk = new BigInteger(key[0]);
-                  }else{
-                      throw new Exception("文件错误");
-                  }
-              }
-              br.close();
-              return sk;
-          }
-          catch(Exception ex)
-          {
-              ex.printStackTrace();
-          }
-          return sk;
-      }
+      
     public static void setPKai(Element PKai) {
 		get_PKai = PKai;
 	}
@@ -974,6 +852,6 @@ public class Method_F {
 	  public static void StopCountTime(String Info,long time1) {
 		  long time2;
 		  time2 = System.currentTimeMillis();
-		  System.out.println(Info +" : "  + (time2-time1) + "豪秒");
+		  System.out.println(Info +" : "  + (time2-time1) + "毫秒");
 	  }
 }
