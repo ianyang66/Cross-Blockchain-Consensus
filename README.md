@@ -1,2 +1,2 @@
 # CrossChainConsensus
-A cross-chain consensus method
+A cross-chain consensus method for NDHU IM Infomation Security Lab.
